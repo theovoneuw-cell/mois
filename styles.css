@@ -1,8 +1,7 @@
 /* Mois : un flyer riso à deux encres (jaune, bleu) et du vert en surimpression. */
 
-@font-face { font-family: 'Anybody'; src: url(fonts/anybody.woff2) format('woff2'); font-weight: 100 900; font-stretch: 50% 150%; font-display: swap; }
-@font-face { font-family: 'Funnel Sans'; src: url(fonts/funnel-sans.woff2) format('woff2'); font-weight: 300 800; font-display: swap; }
-@font-face { font-family: 'Funnel Display'; src: url(fonts/funnel-display.woff2) format('woff2'); font-weight: 300 800; font-display: swap; }
+@font-face { font-family: 'Bagel Fat One'; src: url(fonts/bagel-fat-one.woff2) format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Atkinson Next'; src: url(fonts/atkinson-next.woff2) format('woff2'); font-weight: 200 800; font-display: swap; }
 
 :root {
   color-scheme: light;
@@ -24,9 +23,9 @@
   --bande-encre: #00538A;
   --bande-titre: #0078BF;
   --ombre-feuille: 0 -12px 40px rgba(14, 47, 74, .18);
-  --t-sec: 'Funnel Sans', system-ui, sans-serif;
-  --t-aff: 'Anybody', 'Funnel Display', system-ui, sans-serif;
-  --t-tit: 'Funnel Display', 'Funnel Sans', system-ui, sans-serif;
+  --t-sec: 'Atkinson Next', system-ui, sans-serif;
+  --t-aff: 'Bagel Fat One', system-ui, sans-serif;
+  --t-tit: 'Atkinson Next', system-ui, sans-serif;
   --tabbar: 64px;
 }
 @media (prefers-color-scheme: dark) {
@@ -61,7 +60,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--papier); color: var(--encre);
   font-family: var(--t-sec); font-size: 16px; line-height: 1.4;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums; font-synthesis: none;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: none;
 }
@@ -71,12 +70,12 @@ button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
 :focus-visible { outline: 3px solid var(--bleu); outline-offset: 2px; border-radius: 6px; }
 svg[data-ic] { width: 22px; height: 22px; flex: none; }
-/* le + et le − d'Anybody sont trop menus : on les prend dans Funnel Sans */
-.sg { font-family: var(--t-sec); font-weight: 800; font-stretch: normal; margin-right: .04em; }
+/* signes + et − dans la police du texte, plus nets */
+.sg { font-family: var(--t-sec); font-weight: 800; margin-right: .06em; }
 .feuille form:focus { outline: none; }
 [hidden] { display: none !important; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-h2 { font-family: var(--t-tit); font-weight: 700; font-size: 28px; letter-spacing: -.02em; line-height: 1.1; margin: 0; }
+h2 { font-family: var(--t-tit); font-weight: 800; font-size: 28px; letter-spacing: -.01em; line-height: 1.1; margin: 0; }
 h3 { font-family: var(--t-sec); font-weight: 700; font-size: 17px; margin: 0 0 4px; }
 
 /* ---------- bandeau jaune ---------- */
@@ -110,8 +109,8 @@ h3 { font-family: var(--t-sec); font-weight: 700; font-size: 17px; margin: 0 0 4
 }
 #moisNom {
   display: block; white-space: nowrap;
-  font-family: var(--t-aff); font-weight: 900; font-stretch: 130%;
-  font-size: 84px; line-height: .8; letter-spacing: -.035em;
+  font-family: var(--t-aff); font-weight: 400;
+  font-size: 84px; line-height: .86; letter-spacing: -.01em;
   color: var(--bande-titre);
   /* repérage raté : la passe verte tombe à côté de la bleue */
   text-shadow: .045em .035em 0 #2E8B3E;
@@ -123,8 +122,8 @@ h3 { font-family: var(--t-sec); font-weight: 700; font-size: 17px; margin: 0 0 4
 .duo-col { display: flex; flex-direction: column; min-width: 0; border-top: 4px solid var(--bande-encre); padding-top: 10px; }
 .duo-lab { font-size: 15px; font-weight: 700; }
 .duo-n {
-  font-family: var(--t-aff); font-weight: 900; font-stretch: 72%;
-  font-size: clamp(56px, 19vw, 80px); line-height: .9; letter-spacing: -.02em;
+  font-family: var(--t-aff); font-weight: 400;
+  font-size: clamp(56px, 19vw, 80px); line-height: .95; letter-spacing: -.01em;
   margin-top: 6px; color: var(--bande-titre); white-space: nowrap;
 }
 .duo-n small { font-size: .5em; font-weight: 800; margin-left: .08em; letter-spacing: 0; }
@@ -186,11 +185,11 @@ body:not([data-vue="mois"]) .jauge { display: none; }
 .ligne.venir::after { background: repeating-linear-gradient(90deg, var(--jaune-ligne) 0 5px, transparent 5px 9px); }
 .ligne.in.venir::after { background: repeating-linear-gradient(90deg, var(--vert) 0 5px, transparent 5px 9px); }
 .ligne:active { background: var(--papier-2); }
-.l-jour { font-family: var(--t-aff); font-weight: 800; font-stretch: 100%; font-size: 15px; color: var(--bleu-texte); }
+.l-jour { font-family: var(--t-aff); font-weight: 400; font-size: 15px; color: var(--bleu-texte); }
 .l-nom { min-width: 0; font-weight: 650; font-size: 16px; line-height: 1.25; }
 .l-nom small { display: block; font-size: 13px; font-weight: 500; color: var(--encre-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .l-nom b { font-weight: inherit; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.l-m { font-family: var(--t-aff); font-weight: 800; font-stretch: 108%; font-size: 17px; white-space: nowrap; }
+.l-m { font-family: var(--t-aff); font-weight: 400; font-size: 17px; white-space: nowrap; }
 .in .l-m { color: var(--vert); }
 .venir .l-nom b, .venir .l-m { color: var(--encre-2); }
 .saute .l-m { text-decoration: line-through; color: var(--encre-2); }
@@ -205,7 +204,7 @@ body:not([data-vue="mois"]) .jauge { display: none; }
 .tampon svg { width: 22px; height: 22px; }
 .tampon.texte {
   border: 1.5px solid currentColor; border-radius: 8px;
-  font-family: var(--t-aff); font-weight: 850; font-stretch: 70%; font-size: 12px; letter-spacing: -.01em; line-height: 1;
+  font-family: var(--t-aff); font-weight: 400; font-size: 12px; letter-spacing: -.01em; line-height: 1;
 }
 .tampon.libre { background: var(--jaune); color: #0E2F4A; border-radius: 50%; }
 .tampon.libre.in { background: var(--vert); color: var(--papier); }
@@ -239,7 +238,7 @@ body:not([data-vue="mois"]) .jauge { display: none; }
 /* ---------- récurrents ---------- */
 .rec-tete { padding: 20px 0 6px; }
 .rec-total { margin: 6px 0 0; color: var(--encre-2); font-size: 15px; }
-.rec-total b { color: var(--encre); font-family: var(--t-aff); font-weight: 800; font-stretch: 108%; }
+.rec-total b { color: var(--encre); font-family: var(--t-aff); font-weight: 400; }
 .rec-liste { list-style: none; margin: 0 0 8px; padding: 0; }
 .cat-titre { margin: 34px 0 4px; }
 .cat-groupe { margin-top: 18px; }
@@ -254,9 +253,9 @@ body:not([data-vue="mois"]) .jauge { display: none; }
 .tuile input { position: absolute; opacity: 0; pointer-events: none; }
 .tuile .tampon { width: 40px; height: 40px; }
 .tuile .tampon svg { width: 30px; height: 30px; }
-.tampon.texte.large { width: auto; min-width: 40px; padding: 0 7px; font-size: 14px; }
+.tampon.texte.large { width: auto; min-width: 40px; padding: 0 6px; font-size: 12px; }
 .tuile-nom { font-size: 13px; font-weight: 650; line-height: 1.2; }
-.tuile-m { font-family: var(--t-aff); font-weight: 800; font-stretch: 105%; font-size: 13px; }
+.tuile-m { font-family: var(--t-aff); font-weight: 400; font-size: 13px; }
 .tuile:has(input:checked) { background: var(--jaune); border: 1.5px solid #0078BF; color: #0E2F4A; }
 .tuile:has(input:checked) .tampon { color: #00538A; }
 .tuile:has(input:focus-visible) { outline: 3px solid var(--bleu); outline-offset: 2px; }
@@ -310,9 +309,9 @@ body:not([data-vue="mois"]) .jauge { display: none; }
 .montant-saisie { display: flex; align-items: baseline; gap: 8px; border-bottom: 3px solid var(--bleu); }
 .champ-montant input {
   height: auto; padding: 0 0 4px; border: 0; border-radius: 0; box-shadow: none !important;
-  font-family: var(--t-aff); font-weight: 850; font-stretch: 125%; font-size: 46px; letter-spacing: -.03em; line-height: 1.05;
+  font-family: var(--t-aff); font-weight: 400; font-size: 46px; letter-spacing: 0; line-height: 1.05;
 }
-.euro { font-family: var(--t-aff); font-weight: 800; font-stretch: 110%; font-size: 26px; color: var(--encre-2); }
+.euro { font-family: var(--t-aff); font-weight: 400; font-size: 26px; color: var(--encre-2); }
 .f-erreur { margin: -6px 0 0; color: var(--rouge); font-weight: 650; font-size: 14px; }
 .rangee-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .f-rec { display: flex; flex-direction: column; gap: 12px; }
