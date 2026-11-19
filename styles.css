@@ -1,7 +1,7 @@
 /* Mois : un flyer riso à deux encres (jaune, bleu) et du vert en surimpression. */
 
 @font-face { font-family: 'Bagel Fat One'; src: url(fonts/bagel-fat-one.woff2) format('woff2'); font-weight: 400; font-display: swap; }
-@font-face { font-family: 'Atkinson Next'; src: url(fonts/atkinson-next.woff2) format('woff2'); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: 'Atkinson Hyperlegible Next'; src: url(fonts/atkinson-next.woff2) format('woff2'); font-weight: 200 800; font-display: swap; }
 
 :root {
   color-scheme: light;
@@ -23,9 +23,9 @@
   --bande-encre: #00538A;
   --bande-titre: #0078BF;
   --ombre-feuille: 0 -12px 40px rgba(14, 47, 74, .18);
-  --t-sec: 'Atkinson Next', system-ui, sans-serif;
+  --t-sec: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
   --t-aff: 'Bagel Fat One', system-ui, sans-serif;
-  --t-tit: 'Atkinson Next', system-ui, sans-serif;
+  --t-tit: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
   --tabbar: 64px;
 }
 @media (prefers-color-scheme: dark) {
