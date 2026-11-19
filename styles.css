@@ -126,7 +126,7 @@ h3 { font-family: var(--t-sec); font-weight: 700; font-size: 17px; margin: 0 0 4
   font-size: clamp(56px, 19vw, 80px); line-height: .95; letter-spacing: -.01em;
   margin-top: 6px; color: var(--bande-titre); white-space: nowrap;
 }
-.duo-n small { font-size: .5em; font-weight: 800; margin-left: .08em; letter-spacing: 0; }
+.duo-n small { font-size: .5em; margin-left: .08em; letter-spacing: 0; }
 .duo-sub { font-size: 13px; font-weight: 550; margin-top: 6px; }
 
 .jauge {
@@ -255,7 +255,6 @@ body:not([data-vue="mois"]) .jauge { display: none; }
 .tuile .tampon svg { width: 30px; height: 30px; }
 .tampon.texte.large { width: auto; min-width: 40px; padding: 0 6px; font-size: 12px; }
 .tuile-nom { font-size: 13px; font-weight: 650; line-height: 1.2; }
-.tuile-m { font-family: var(--t-aff); font-weight: 400; font-size: 13px; }
 .tuile:has(input:checked) { background: var(--jaune); border: 1.5px solid #0078BF; color: #0E2F4A; }
 .tuile:has(input:checked) .tampon { color: #00538A; }
 .tuile:has(input:focus-visible) { outline: 3px solid var(--bleu); outline-offset: 2px; }
