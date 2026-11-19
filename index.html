@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mois</title>
+<meta name="description" content="Ce qui rentre, ce qui sort, mois par mois.">
+<meta name="theme-color" content="#FFE800">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mois">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icone-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preload" href="fonts/anybody.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body data-vue="mois">
+<div class="app">
+  <header class="bande" id="bande">
+    <nav class="mois-nav" aria-label="Changer de mois">
+      <button class="nav-btn" id="prec" type="button" aria-label="Mois précédent"><svg data-ic="lu:chevron-left"></svg><span id="precNom"></span></button>
+      <button class="nav-auj" id="ceMois" type="button" hidden>Ce mois-ci</button>
+      <button class="nav-btn" id="suiv" type="button" aria-label="Mois suivant"><span id="suivNom"></span><svg data-ic="lu:chevron-right"></svg></button>
+    </nav>
+    <h1 class="mois-titre"><span id="moisNom">novembre</span><span class="annee" id="annee">2026</span></h1>
+    <div class="jauge" id="jauge" aria-hidden="true"></div>
+    <div class="duo">
+      <div class="duo-col">
+        <span class="duo-lab" id="labG">Aujourd’hui</span>
+        <span class="duo-n" id="nG">0</span>
+        <span class="duo-sub" id="subG"></span>
+      </div>
+      <div class="duo-col">
+        <span class="duo-lab" id="labD">Fin du mois</span>
+        <span class="duo-n" id="nD">0</span>
+        <span class="duo-sub" id="subD"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenu">
+    <nav class="onglets" aria-label="Sections">
+      <button class="onglet" data-vue="mois" aria-current="page"><svg data-ic="lu:list-checks"></svg><span>Mois</span></button>
+      <button class="onglet" data-vue="recurrents"><svg data-ic="lu:repeat"></svg><span>Récurrents</span></button>
+      <button class="onglet" data-vue="reglages"><svg data-ic="lu:settings"></svg><span>Réglages</span></button>
+      <button class="ajout" id="ajouter" type="button" aria-label="Ajouter un mouvement"><svg data-ic="lu:plus"></svg></button>
+    </nav>
+
+    <section class="vue" id="vue-mois" aria-label="Mouvements du mois">
+      <ol class="fil" id="fil"></ol>
+      <div class="vide" id="videMois" hidden>
+        <p class="vide-titre">Rien sur ce mois.</p>
+        <p class="vide-texte">Coche ce que tu paies chaque mois, ça se reportera tout seul.</p>
+        <button class="btn btn-plein" type="button" data-aller="recurrents">Cocher mes récurrents</button>
+      </div>
+    </section>
+
+    <section class="vue" id="vue-recurrents" aria-label="Récurrents" hidden>
+      <div class="rec-tete">
+        <h2>Récurrents</h2>
+        <p class="rec-total" id="recTotal"></p>
+      </div>
+      <ul class="rec-liste" id="recListe"></ul>
+      <h2 class="cat-titre">Coche ce que tu as</h2>
+      <div id="catalogue"></div>
+      <button class="btn btn-trait autre" type="button" id="autreRec"><svg data-ic="lu:plus"></svg>Un autre récurrent</button>
+    </section>
+
+    <section class="vue" id="vue-reglages" aria-label="Réglages" hidden>
+      <h2>Réglages</h2>
+      <div class="bloc">
+        <h3>Sauvegarde</h3>
+        <p>Tout reste sur ton téléphone. Garde de temps en temps une copie dans Fichiers ou iCloud Drive.</p>
+        <div class="rangee">
+          <button class="btn btn-trait" type="button" id="exporter"><svg data-ic="lu:download"></svg>Enregistrer une copie</button>
+          <label class="btn btn-trait"><svg data-ic="lu:upload"></svg>Reprendre une copie<input type="file" id="importer" accept="application/json,.json" hidden></label>
+        </div>
+      </div>
+      <div class="bloc">
+        <h3>Tout effacer</h3>
+        <p>Supprime tous les récurrents et mouvements de cet appareil.</p>
+        <button class="btn btn-danger" type="button" id="effacer"><svg data-ic="lu:trash-2"></svg>Tout effacer</button>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+<!-- Feuille : ajouter ou modifier -->
+<dialog class="feuille" id="feuille" aria-labelledby="fTitre">
+  <form method="dialog" id="fForm" novalidate tabindex="-1" autofocus>
+    <div class="f-tete">
+      <h2 id="fTitre">Nouveau mouvement</h2>
+      <button class="f-fermer" type="button" value="annuler" aria-label="Fermer" data-fermer><svg data-ic="lu:x"></svg></button>
+    </div>
+    <div class="f-marque" id="fMarque" hidden></div>
+    <fieldset class="sens" id="fSens">
+      <legend class="vh">Sens</legend>
+      <label><input type="radio" name="sens" value="-1" checked><span>Sortie</span></label>
+      <label><input type="radio" name="sens" value="1"><span>Rentrée</span></label>
+    </fieldset>
+    <label class="champ champ-montant">
+      <span>Montant</span>
+      <span class="montant-saisie"><input id="fMontant" name="montant" inputmode="decimal" autocomplete="off" placeholder="0" required><span class="euro">€</span></span>
+    </label>
+    <p class="f-erreur" id="fErreur" role="alert" hidden></p>
+    <label class="champ" id="fNomChamp"><span>Nom</span><input id="fNom" name="nom" autocomplete="off" maxlength="60" placeholder="Vente du synthé, cadeau, réparation…"></label>
+    <label class="champ" id="fDateChamp"><span>Date</span><input id="fDate" name="date" type="date"></label>
+    <label class="interrupteur" id="fRecChamp"><input type="checkbox" id="fRec"><span>Tous les mois</span></label>
+    <div class="f-rec" id="fRecBloc" hidden>
+      <div class="rangee-2">
+        <label class="champ"><span>Le</span><select id="fJour"></select></label>
+        <label class="champ"><span>Revient</span>
+          <select id="fFreq"><option value="1">tous les mois</option><option value="3">tous les 3 mois</option><option value="12">tous les ans</option></select>
+        </label>
+      </div>
+      <div class="rangee-2">
+        <label class="champ"><span>À partir de</span><input id="fDebut" type="month"></label>
+        <label class="champ"><span>Jusqu’à <small>(facultatif)</small></span><input id="fFin" type="month"></label>
+      </div>
+    </div>
+    <div class="f-ajust" id="fAjust" hidden>
+      <p id="fAjustTexte"></p>
+      <div class="rangee">
+        <button class="btn btn-trait" type="button" id="fSauter">Pas ce mois-ci</button>
+        <button class="btn btn-trait" type="button" id="fTousMois">Modifier tous les mois</button>
+      </div>
+    </div>
+    <div class="f-actions">
+      <button class="btn btn-danger-doux" type="button" id="fSupprimer" hidden><svg data-ic="lu:trash-2"></svg>Supprimer</button>
+      <button class="btn btn-plein" type="submit" value="ok" id="fOk">Ajouter</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastTexte"></span><button type="button" id="toastAnnuler">Annuler</button></div>
+
+<script src="js/icones.js?v=1"></script>
+<script src="js/catalogue.js?v=1"></script>
+<script src="js/app.js?v=1"></script>
+</body>
+</html>
